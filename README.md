@@ -106,7 +106,7 @@ defense-game/
 - Wave 1 starts with 3 mobs. Each subsequent wave adds 2 more mobs.
 - Mobs spawn one at a time in a randomly chosen row.
 - After all mobs in a wave are defeated, a 3-second delay precedes the next wave.
-- Spawn intervals decrease as waves progress, with a minimum interval of 0.2 seconds.
+- Spawn intervals might decrease as waves progress.
 
 ---
 

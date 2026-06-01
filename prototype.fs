@@ -241,6 +241,10 @@ let bulletSize = function
     | Rapid -> Vector2(50.0f, 24.0f)
     | Area -> Vector2(132.0f, 132.0f)
 
+let healthBarBorderColor = Color(24, 86, 36, 170)
+let healthBarBackgroundColor = Color(80, 132, 62, 190)
+let healthBarFillColor = Color(72, 226, 88, 255)
+
 let healthRatio current maxHp =
     if maxHp <= 0 then
         0.0f
@@ -592,9 +596,9 @@ let drawTowerHealthBar (t: Tower) =
     let hpW = int (float32 barWidth * healthRatio t.HP t.MaxHP)
     let barX = int tx + 10
     let barY = int ty - 10
-    Raylib.DrawRectangle(barX - 1, barY - 1, barWidth + 2, 7, Color(24, 86, 36, 170))
-    Raylib.DrawRectangle(barX, barY, barWidth, 5, Color(80, 132, 62, 190))
-    Raylib.DrawRectangle(barX, barY, hpW, 5, Color(72, 226, 88, 255))
+    Raylib.DrawRectangle(barX - 1, barY - 1, barWidth + 2, 7, healthBarBorderColor)
+    Raylib.DrawRectangle(barX, barY, barWidth, 5, healthBarBackgroundColor)
+    Raylib.DrawRectangle(barX, barY, hpW, 5, healthBarFillColor)
 
 // projectile draw
 let drawProjectile (p: Projectile) =
@@ -763,11 +767,11 @@ let runGame () : GameResult =
         let barX = castleX + (castleW - barW) / 2.0f
         let barY = castleY - 25.0f
 
-        Raylib.DrawRectangle(int barX - 2, int barY - 2, int barW + 4, int barH + 4, Color.Black)
-        Raylib.DrawRectangle(int barX, int barY, int barW, int barH, Color.Maroon)
+        Raylib.DrawRectangle(int barX - 2, int barY - 2, int barW + 4, int barH + 4, healthBarBorderColor)
+        Raylib.DrawRectangle(int barX, int barY, int barW, int barH, healthBarBackgroundColor)
         let hpRatio = max 0.0f (min 1.0f (float32 gs.CastleHP / CASTLE_MAX_HP))
         let currentW = int (barW * hpRatio)
-        Raylib.DrawRectangle(int barX, int barY, currentW, int barH, Color.Red)
+        Raylib.DrawRectangle(int barX, int barY, currentW, int barH, healthBarFillColor)
         
         drawUiText (sprintf "%d / %d" gs.CastleHP (int CASTLE_MAX_HP)) (int barX) (int barY - 18) 17.0f 1.0f Color.DarkGray
 
